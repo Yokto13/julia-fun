@@ -16,7 +16,7 @@ end
 
 ani = @animate for a=0:0.03:2π
     f(x, y) = julia(x, y, 0.72 * exp(im * a), 100)
-    contour(x, y, f, fill=fill=(true,cgrad(:viridis)), 
+    contour(x, y, f, fill=(true,cgrad(:viridis)), 
             title = "Julia set, in Julia, for Julia",
            linewidth=0
           )
