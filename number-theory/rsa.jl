@@ -41,8 +41,6 @@ N = p * q
 d = modinv(e, tot)
 @assert e * d % tot == 1
 @assert gcd(e, tot) == 1
-println(d)
-println(tot)
 
 println("Public N: ", N)
 println("Public e: ", e)
