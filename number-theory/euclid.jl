@@ -13,6 +13,16 @@ end
 
 function euclid_c(a, b)
     while b != 0
+        #a, b = b, a % b 
+        t = b
+        b = a % b 
+        a = t
+    end
+    return a
+end
+
+function euclid_ct(a, b)
+    while b != 0
         a, b = b, a % b 
     end
     return a
@@ -61,6 +71,7 @@ for t in testcases
     @assert gcd == euclid_old(a, b)
     @assert gcd == euclid_r(a, b)
     @assert gcd == euclid_fast(a, b)
+    @assert gcd == euclid_ct(a, b)
 end
 
 # ---------------------
@@ -78,17 +89,20 @@ c = 0
 old = 0
 r = 0
 fast = 0
+ct = 0
 for t in testcases
     a, b = t
-    global c, old, r, fast
+    global c, old, r, fast, ct 
     c += @elapsed euclid_c(a, b)
     old += @elapsed euclid_old(a, b)
     r += @elapsed euclid_r(a, b)
     fast += @elapsed euclid_fast(a, b)
+    ct += @elapsed euclid_ct(a, b)
 end
 
 println("Averages for small:")
 println("c ", c / length(testcases))
+println("ct ", ct / length(testcases))
 println("old ", old / length(testcases))
 println("r ", r / length(testcases))
 println("fast ", fast / length(testcases))
@@ -107,15 +121,18 @@ end
 c = 0
 r = 0
 fast = 0
+ct = 0
 for t in testcases
     a, b = t
-    global c, r,fast 
+    global c, ct, r,fast 
     c += @elapsed euclid_c(a, b)
     r += @elapsed euclid_r(a, b)
     fast += @elapsed euclid_fast(a, b)
+    ct += @elapsed euclid_ct(a, b)
 end
 
 println("Averages for small:")
 println("c ", c / length(testcases))
 println("r ", r / length(testcases))
 println("fast ", fast / length(testcases))
+println("ct ", ct / length(testcases))
